@@ -7,31 +7,17 @@ import java.util.Scanner;
 //Battleship
 public class Main
 {
-  Board b = new Board();
+  Board s1 = new Board();//p-1 secret board
+  Board s2 = new Board();//p-2 secret board
+  Board c1 = new Board();//computer generated
+  Board vis = new Board();//what you see
   /*public static void main(String[] args)
   {
     System.out.println(b + "\n");
     boolean addNew = true;
     
     while(addNew)
-    {
-      // Ask for new ship
-      System.out.println("Add a new ship? (yes/no)");
-      String ans = scan.nextLine();
-      if(ans.toLowerCase().equals("yes"))
-      {
-        // Get parameters for new ship
-        System.out.println("Starting in which row?");
-        int r = scan.nextInt();
-        System.out.println("Starting in which column?");
-        int c = scan.nextInt();
-        System.out.println("How long?");
-        int l = scan.nextInt();
-        scan.nextLine();
-        System.out.println("Horizontal (h) or vertical (v)?");
-        String d = scan.nextLine();
-        boolean h = (d.toLowerCase().equals("h"));
-        
+    { 
         // Call addShip method and return message based on true/false value
         if(b.addShip(r, c, l, h))
         {
