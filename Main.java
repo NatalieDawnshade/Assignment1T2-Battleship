@@ -4,13 +4,17 @@
  * requires Board class to be written 
  */
 import java.util.Scanner;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 //Battleship
 public class Main
 {
-  Board s1 = new Board();//p-1 secret board
-  Board s2 = new Board();//p-2 secret board
-  Board c1 = new Board();//computer generated
-  Board vis = new Board();//what you see
+  static Board s1 = new Board();//p-1 secret board
+  static Board s2 = new Board();//p-2 secret board
+  static Board c1 = new Board();//computer generated
+  static Board p1 = new Board();//what you see
+  static boolean aah = false;
   /*public static void main(String[] args)
   {
     System.out.println(b + "\n");
@@ -113,6 +117,8 @@ public class Main
       public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
       public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
       public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
+  
+  
   public static String menu()//prnts reg menu
   {
     Scanner scan = new Scanner(System.in);
@@ -222,6 +228,33 @@ public class Main
       return num;
     }
   }
+  public static String menu5()//prnts p-2 menu
+  {
+    Scanner scan = new Scanner(System.in);
+    Boolean flag = true;
+    while (flag == true)
+    {
+      System.out.println("|---------------------------------------------|");
+      System.out.println(("|")+(CYAN_BACKGROUND_BRIGHT + BLACK_BOLD + "         SHOOT AGANE??😂           ") + (ANSI_RESET +"|"));
+      System.out.println("|---------------------------------------------|");
+      System.out.println("1) Yes (keep playing)");
+      System.out.println("2) No (Leave and go to Game Mode Menu)");
+      //System.out.println("3) Play!");
+      //System.out.println("4) Exit Game- Back to Assignment/Code Menu");
+      //System.out.println("5) Option 5");
+      //System.out.println("2) ???");
+      System.out.println("|---------------------------------------------|");
+      System.out.println(" : ");
+      //scan.nextLine();
+      flag = false;
+    }
+    {
+      String num = scan.nextLine();
+      //scan.close();
+      num = num.replaceAll("\\s", "");
+      return num;
+    }
+  }
   public static void choices()//real main, into assign.
   {  //choices method
     Boolean flag = false;
@@ -293,7 +326,7 @@ public class Main
       } 
       else if(num.equals("2"))
       {//option 2- PLAY
-        //playMe();
+        playWithMe();
         choices3();//BACK
         flag = true;
       }
@@ -358,5 +391,95 @@ public class Main
   public static void main(String[] args) 
   {
     choices();
+    
+  }
+  public static String shootP1(int x,int y)
+  {
+
+    String hitOrMiss = p1.shootP1(x,y);
+    return hitOrMiss;
+    
+  }
+  public static int giX()
+  {
+    s1.pickX();
+    int x = s1.getX();
+    return x;
+  }
+  public static int giY()
+  {
+    s1.pickY();
+    int y = s1.getY();
+    return y;
+  }
+  public static void shootMain()
+  {
+    Boolean flag = false;
+    String num = "";
+    while(flag == false)
+    {
+      int x = giX();
+      int y = giY();
+      String hOm = s1.shootP1(x,y);
+      
+      if(hOm != "🔘" && hOm != "🔄")
+      {
+        flag = true;
+        p1.setVis("❌");
+        System.out.println("\nHit!\n\n" + p1 + "\n");
+      }
+      else if(hOm == "🔘")
+      {
+        flag = true;
+        p1.setVis("🔘");
+        System.out.println("\nMiss!\n\n" + p1 + "\n");
+      }
+      else
+      {
+        System.out.println("You've already tried these coordinates. Please Try Again.\n");
+      }
+    }
+  }
+  public static void playWithMe()
+  {
+    Boolean flag = false;
+    while(flag == false)
+    {
+      shootMain();
+      Agane();
+      boolean x = aah;
+      if(x == true)
+      {
+        //go agane😂
+        flag = false;
+      }
+      else
+      {//UP
+        flag = true;
+        //UP
+      }
+    }
+  }
+  public static void Agane()
+  {
+    Boolean flag = false;
+    while(flag == false)
+    {
+      String num = menu5();//MENU CALL
+      if(num.equals("1"))
+      {
+        flag = true;
+        aah = true;
+      }
+      else if(num.equals("2"))
+      {
+        flag = true;
+        aah = false;
+      }
+      else
+      {
+        System.out.println("What part of 2 options don't you get? Pick a number, 1 or 2. Proof the American school system is failing.../s");
+      }
+    }
   }
 }

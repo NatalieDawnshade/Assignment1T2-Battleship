@@ -273,7 +273,6 @@ public class Board
       return false;
     }
   }
-  
   public void toStringy()
   {
     for (int i = 0; i < 2; i++) 
@@ -284,5 +283,60 @@ public class Board
       }
       System.out.println();
     }
+  }
+  public String shootP1(int x, int y)
+  {
+    if (b [y][x] == "🌊")
+    {//MISS🔘
+      //b [y][x] = "🔘";
+      //flag = true;
+      return "🔘";
+    }
+    else if (b [y][x] != "🌊" && b [y][x] == "🛳")
+    {//carrier- 5🛳
+      //b [y][x] = "❌";
+      //flag = true;
+      return "🛳";
+    }
+    else if (b [y][x] != "🌊" && b [y][x] == "🚢")
+    {//battleship- 4🚢
+      //b [y][x] = "❌";
+      //flag = true;
+      return "🚢";
+    }
+    else if (b [y][x] != "🌊" && b [y][x] == "🛶")
+    {//submarine- 3🛶
+      //b [y][x] = "❌";
+      //flag = true;
+      return "🛶";
+    }
+    else if (b [y][x] != "🌊" && b [y][x] == "⛴")
+    {//cruiser- 3⛴
+      //b [y][x] = "❌";
+      //flag = true;
+      return "⛴";
+    }
+    else if (b [y][x] != "🌊" && b [y][x] == "🛥")
+    {//destroyer- 2🛥
+      //b [y][x] = "❌";
+      //flag = true;
+      return "🛥";
+    }
+    else
+    {//REPEAT🔄
+      return "🔄";
+    }
+  }
+  public void setVis(String xo)
+  {
+    b [y][x] = xo;
+  }
+  public int getX()
+  {
+    return x;
+  }
+  public int getY()
+  {
+    return y;
   }
 }
